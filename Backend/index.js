@@ -17,47 +17,47 @@ app.use(morgan("dev"))
 
 //Apis de prueba 
 
-app.get("/product", async (req, res) => {
+app.get("/products", async (req, res) => {
     const conexion = await database.getConexion();
-    try {
-        if (conexion) {
+    if (conexion) {
+        try {
             const resultados = await conexion.query("select * from product ");
             if (resultados) {
                 res.json(resultados)
             } else {
                 res.status(404).json({ error: 'Error al obtener producto' })
             }
-        } else {
-            res.status(403).json({ error: 'Error de conexión a BDD' })
-        }
-    } catch (err) {
-        res.status(500).json({ error: 'Error' })
-    }
 
+        } catch (err) {
+            res.status(500).json({ error: 'Error' })
+        }
+    } else {
+        res.status(403).json({ error: 'Error de conexión a BDD' })
+    }
 })
-app.get("/category", async (req, res) => {
+app.get("/categories", async (req, res) => {
     const conexion = await database.getConexion();
-    try {
-        if (conexion) {
+    if (conexion) {
+        try {
             const resultados = await conexion.query("select * from category ");
             if (resultados) {
                 res.json(resultados)
             } else {
                 res.status(404).json({ error: 'Error al obtener producto' })
             }
-        } else {
-            res.status(403).json({ error: 'Error de conexión a BDD' })
-        }
-    } catch (err) {
-        res.status(500).json({ error: 'Error' })
-    }
 
+        } catch (err) {
+            res.status(500).json({ error: 'Error' })
+        }
+    } else {
+        res.status(403).json({ error: 'Error de conexión a BDD' })
+    }
 })
 
 app.get("/product/:id", async (req, res) => {
     const conexion = await database.getConexion();
-    try {
-        if (conexion) {
+    if (conexion) {
+        try {
             const { id } = req.params;
             if (id != null) {
                 const resultados = await conexion.query("select * from product where id = ? ", [id]);
@@ -66,22 +66,23 @@ app.get("/product/:id", async (req, res) => {
                 } else {
                     res.status(404).json({ error: 'Error al obtener producto' })
                 }
-            }else{
-                res.json({msg:"ID no encontrado"})
+            } else {
+                res.json({ msg: "ID no encontrado" })
             }
-        } else {
-            res.status(403).json({ error: 'Error de conexión a BDD' })
+
+        } catch (err) {
+            res.status(500).json({ error: 'Error' })
         }
-    } catch (err) {
-        res.status(500).json({ error: 'Error' })
+    } else {
+        res.status(403).json({ error: 'Error de conexión a BDD' })
     }
 
 })
 
 app.get("/category/:id", async (req, res) => {
     const conexion = await database.getConexion();
-    try {
-        if (conexion) {
+    if (conexion) {
+        try {
             const { id } = req.params;
             if (id != null) {
                 const resultados = await conexion.query("select id ,name from category where id = ? ", [id]);
@@ -90,37 +91,39 @@ app.get("/category/:id", async (req, res) => {
                 } else {
                     res.status(404).json({ error: 'Error al obtener categoria' })
                 }
-            }else{
-                res.json({msg:"ID no encontrado"})
+            } else {
+                res.json({ msg: "ID no encontrado" })
             }
-        } else {
-            res.status(403).json({ error: 'Error de conexión a BDD' })
+
+        } catch (err) {
+            res.status(500).json({ error: 'Error' })
         }
-    } catch (err) {
-        res.status(500).json({ error: 'Error' })
+    } else {
+        res.status(403).json({ error: 'Error de conexión a BDD' })
     }
 })
 
 //Codigo para la prueba
 app.get("/search/:id", async (req, res) => {
     const conexion = await database.getConexion();
-    try {
-        if (conexion) {
+    if (conexion) {
+        try {
             const { id } = req.params;
             if (id != null) {
-                const resultados = await conexion.query('select tabla1.id_category , tabla1.name_category , p.name as name_product , p.category from product p inner join (select c.id as id_category, c.name as name_category from category c where id = ?) as tabla1 on tabla1.id_category = p.category', [id]);
+                const resultados = await conexion.query('select tabla1.name_category , p.name as name_product , p.url_image ,p.category , p.price , p.discount from product p inner join (select c.id as id_category, c.name as name_category from category c where id = ?) as tabla1 on tabla1.id_category = p.category', [id]);
                 if (resultados) {
                     res.json(resultados)
                 } else {
                     res.status(404).json({ error: 'Error al obtener información' })
                 }
-            }else{
-                res.json({msg:"ID no encontrado"})
+            } else {
+                res.json({ msg: "ID no encontrado" })
             }
-        } else {
-            res.status(403).json({ error: 'Error de conexión a BDD' })
+
+        } catch (err) {
+            res.status(500).json({ error: 'Error' })
         }
-    } catch (err) {
-        res.status(500).json({ error: 'Error' })
+    } else {
+        res.status(403).json({ error: 'Error de conexión a BDD' })
     }
 })
