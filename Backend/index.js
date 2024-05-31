@@ -1,12 +1,11 @@
 const express = require('express');
 const database = require('./database')
-const cors = require("cors")
 const morgan = require("morgan")
 
 //Configuracion
 const app = express();
 
-//Asignamos el valor al puerto 
+//Asignamos un puerto X
 app.set('port', 4000)
 app.use(express.json());
 
@@ -60,11 +59,15 @@ app.get("/product/:id", async (req, res) => {
     try {
         if (conexion) {
             const { id } = req.params;
-            const resultados = await conexion.query("select * from product where id = ? ", [id]);
-            if (resultados) {
-                res.json(resultados)
-            } else {
-                res.status(404).json({ error: 'Error al obtener producto' })
+            if (id != null) {
+                const resultados = await conexion.query("select * from product where id = ? ", [id]);
+                if (resultados) {
+                    res.json(resultados)
+                } else {
+                    res.status(404).json({ error: 'Error al obtener producto' })
+                }
+            }else{
+                res.json({msg:"ID no encontrado"})
             }
         } else {
             res.status(403).json({ error: 'Error de conexión a BDD' })
@@ -80,11 +83,15 @@ app.get("/category/:id", async (req, res) => {
     try {
         if (conexion) {
             const { id } = req.params;
-            const resultados = await conexion.query("select id ,name from category where id = ? ", [id]);
-            if (resultados) {
-                res.json(resultados)
-            } else {
-                res.status(404).json({ error: 'Error al obtener categoria' })
+            if (id != null) {
+                const resultados = await conexion.query("select id ,name from category where id = ? ", [id]);
+                if (resultados) {
+                    res.json(resultados)
+                } else {
+                    res.status(404).json({ error: 'Error al obtener categoria' })
+                }
+            }else{
+                res.json({msg:"ID no encontrado"})
             }
         } else {
             res.status(403).json({ error: 'Error de conexión a BDD' })
@@ -100,11 +107,15 @@ app.get("/search/:id", async (req, res) => {
     try {
         if (conexion) {
             const { id } = req.params;
-            const resultados = await conexion.query('select tabla1.id_category , tabla1.name_category , p.name as name_product , p.category from product p inner join (select c.id as id_category, c.name as name_category from category c where id = ?) as tabla1 on tabla1.id_category = p.category',[id]);
-            if (resultados) {
-                res.json(resultados)
-            } else {
-                res.status(404).json({ error: 'Error al obtener información' })
+            if (id != null) {
+                const resultados = await conexion.query('select tabla1.id_category , tabla1.name_category , p.name as name_product , p.category from product p inner join (select c.id as id_category, c.name as name_category from category c where id = ?) as tabla1 on tabla1.id_category = p.category', [id]);
+                if (resultados) {
+                    res.json(resultados)
+                } else {
+                    res.status(404).json({ error: 'Error al obtener información' })
+                }
+            }else{
+                res.json({msg:"ID no encontrado"})
             }
         } else {
             res.status(403).json({ error: 'Error de conexión a BDD' })
