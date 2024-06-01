@@ -2,23 +2,27 @@ const express = require('express');
 const database = require('./database')
 const morgan = require("morgan")
 
-
 //Config
 const app = express();
 
-//Asignamos un puerto X
+//PORT
 app.set('port', 4000)
 app.use(express.json());
-
-//Comprobamos el puerto
 app.listen(app.get('port'));
 console.log("PORT: " + app.get("port"));
 
 app.use(morgan("dev"))
 
-//Apis de prueba 
+db = database.getConnection();
+if (db) {
+    console.log("DB connected");
+}else{
+    console.log("DB connection ERROR");
+}
+//API
+// search all the products
 app.get("/products", async (req, res) => {
-    const connection = await database.getConnection();
+    const connection = await db;
     if (connection) {
         try {
             const answ = await connection.query("select * from product ");
@@ -35,9 +39,9 @@ app.get("/products", async (req, res) => {
         res.status(403).json({ msg: 'Connection error ' })
     }
 })
-
+// search all the categories
 app.get("/categories", async (req, res) => {
-    const connection = await database.getConnection();
+    const connection = await db;
     if (connection) {
         try {
             const answ = await connection.query("select * from category ");
@@ -54,9 +58,9 @@ app.get("/categories", async (req, res) => {
         res.status(403).json({ msg: 'Connection error ' })
     }
 })
-
+// search for a specific product
 app.get("/product/:id", async (req, res) => {
-    const connection = await database.getConnection();
+    const connection = await db;
     if (connection) {
         try {
             const { id } = req.params;
@@ -80,8 +84,9 @@ app.get("/product/:id", async (req, res) => {
 
 })
 
+// search for a specific category
 app.get("/category/:id", async (req, res) => {
-    const connection = await database.getConnection();
+    const connection = await db;
     if (connection) {
         try {
             const { id } = req.params;
@@ -106,9 +111,9 @@ app.get("/category/:id", async (req, res) => {
 
 //Codigo para la prueba
 
-//Busqueda de los productos por categoria 
+//Search by ID all the products with the same ID
 app.get("/search/:id", async (req, res) => {
-    const connection = await database.getConnection();
+    const connection = await db;
     if (connection) {
         try {
             const { id } = req.params;
