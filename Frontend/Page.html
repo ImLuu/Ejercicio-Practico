@@ -3,17 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
     <title>ONLINE STORE</title>
+    <link rel="stylesheet" href="page.css">
 </head>
-<link rel="stylesheet" href="page.css">
-<script>
-    document.getElementsByClassName("Initial_text")
-</script>
-
 <body>
-    <div class = "Initial_text">¡ Online Store !</div>
+    <div class="Initial_text">¡Online Store!</div>
+    <div class="search-bar">
+        <input list="productList" id="searchInput" placeholder="Buscar productos por ID o nombre">
+        <datalist id="productList"></datalist>
+        <button onclick="searchProducts()">Buscar</button>
+    </div>
+    <section id="product_container"> Aca se muestra la informacion</section>
 
-
+    <script>
+        
+    </script>
 </body>
 </html>

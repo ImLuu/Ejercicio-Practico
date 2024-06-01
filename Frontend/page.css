@@ -8,3 +8,13 @@
     color: white;
 }
 
+.search-bar{
+    margin-block-start: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.product_container{
+    
+}
