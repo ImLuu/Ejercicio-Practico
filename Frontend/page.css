@@ -18,7 +18,7 @@
 
 .card {
     inline-size: 56rem;
-    block-size: 35rem;
+    block-size: auto;
     border: solid;
     background-color: rgb(62, 95, 138);
 
@@ -54,22 +54,9 @@
 .content {
     margin-block-start: 0.5rem;
     margin-block-end: 1rem;
-}
-
-.horizontal-list {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
 
 }
 
-.horizontal-list li {
-    margin-inline-end: 10px;
-
-}
 
 .text-category {
     display: flex;
@@ -81,4 +68,50 @@
 li {
     border: hidden;
     margin-inline-end: 5px;
+}
+.horizontal-list{   
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-inline-end: 2px;
+    inline-size: auto;
+}
+
+.card-container {
+    background-color: white;
+    margin-inline-start: 15px;
+    margin-block-start: 30px;
+    box-sizing: border-box;
+}
+
+#card {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    color: white;
+   
+}
+
+.product {
+    flex: 0 1 calc(33.333% - 10px);
+    margin: 5px;
+    box-sizing: border-box;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+.product-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-block-end: 20px;
+}
+
+.product-card h3, .product-card img {
+    margin: 10px 0;
 }

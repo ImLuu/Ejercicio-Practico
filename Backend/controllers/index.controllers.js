@@ -25,7 +25,7 @@ exports.getCategories = async (req, res) => {
     const connection = await db;
     if (connection) {
         try {
-            const answ = await connection.query("select name from category ");
+            const answ = await connection.query("select * from category ");
             if (answ) {
                 return res.send(answ)
             } else {
