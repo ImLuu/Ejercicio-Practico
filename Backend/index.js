@@ -9,7 +9,7 @@ const app = express();
 //PORT
 app.set('port', 4000)
 app.use(express.json());
-app.use(cors);
+app.use(cors());
 app.listen(app.get('port'));
 console.log("PORT: " + app.get("port"));
 
