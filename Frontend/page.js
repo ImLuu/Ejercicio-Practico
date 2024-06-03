@@ -80,9 +80,9 @@ const dataCategories = async () => {
 // fetch products by id from API
 const searchProductsByID = async (id) => {
     try {
-        if (id === '0') {
-            window.location.reload(); // Recargar la página
-            return; // Salir de la función para evitar que se realice la solicitud fetch
+        if (id <= '0' || id > 10) {
+            window.location.reload(); 
+            return; 
         }
         
         const res = await fetch(`http://localhost:4000/search/${id}`);
