@@ -84,7 +84,7 @@ const searchProductsByID = async (id) => {
             window.location.reload(); 
             return; 
         }
-        
+            
         const res = await fetch(`http://localhost:4000/search/${id}`);
         if (res.status === 200) {
             const products = await res.json();
