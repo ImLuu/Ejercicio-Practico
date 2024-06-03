@@ -1,7 +1,7 @@
 const mysql = require('promise-mysql');
 require('dotenv').config();
 
-//Creamos la conexión MySQL 
+//DB MySQL 
 const connection = mysql.createConnection({
   host: 'itnovai-test.czny55quvxhk.us-east-1.rds.amazonaws.com',
   user: 'itnovai_test',
