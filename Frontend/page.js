@@ -80,7 +80,7 @@ const dataCategories = async () => {
 // fetch products by id from API
 const searchProductsByID = async (id) => {
     try {
-        if (id <= '0' || id > 10) {
+        if (id <= '0' || id > '10') {
             window.location.reload(); 
             return; 
         }
