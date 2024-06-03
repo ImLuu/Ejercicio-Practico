@@ -17,4 +17,3 @@ app.use(morgan("dev"))
 
 //Using the routes
 app.use(routes);
-
