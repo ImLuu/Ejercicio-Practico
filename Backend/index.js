@@ -1,4 +1,3 @@
-
 const express = require('express');
 const morgan = require("morgan");
 const routes = require("./routes/index.routes");

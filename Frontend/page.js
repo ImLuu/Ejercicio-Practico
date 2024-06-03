@@ -80,11 +80,11 @@ const dataCategories = async () => {
 // fetch products by id from API
 const searchProductsByID = async (id) => {
     try {
-        if (id <= '0' || id > '10') {
+        if (id <= 0 || id > 10) {
             window.location.reload(); 
             return; 
         }
-            
+
         const res = await fetch(`http://localhost:4000/search/${id}`);
         if (res.status === 200) {
             const products = await res.json();
