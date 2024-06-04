@@ -6,7 +6,7 @@ const db= database.getConnection()
 exports.getGreetings = async (req, res) => {
     const connection = await db;
     if (connection) {
-        return res.send({ msg: 'Welcome' })
+        return res.send( '<h1>Welcome</h1>' )
     }else{
         return res.status(500).send({ msg: 'Internal Server Error' });
     }
