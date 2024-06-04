@@ -5,7 +5,7 @@ let allProducts = [];
 // fetch products from API
 const fetchProducts = async () => {
     try {
-        const res = await fetch('http://localhost:4000/products');
+        const res = await fetch('https://ejercicio-practico-n6ps.onrender.com/products');
         if (res.status === 200) {
             allProducts = await res.json();
             renderProducts();
@@ -93,7 +93,7 @@ const nextPage = () => {
 // fetch categories from API
 const dataCategories = async () => {
     try {
-        const res = await fetch('http://localhost:4000/categories');
+        const res = await fetch('https://ejercicio-practico-n6ps.onrender.com/categories');
         if (res.status === 200) {
             const data = await res.json();
             console.log(data);
@@ -119,7 +119,7 @@ const searchProductsByID = async (id) => {
             return; 
         }
 
-        const res = await fetch(`http://localhost:4000/search/${id}`);
+        const res = await fetch(`https://ejercicio-practico-n6ps.onrender.com/search/${id}`);
         if (res.status === 200) {
             const products = await res.json();
             let productsHTML = '';
