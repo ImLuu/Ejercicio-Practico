@@ -41,14 +41,21 @@ const renderProducts = () => {
 // render pagination buttons with arrow navigation
 const renderPagination = () => {
     const totalPages = Math.ceil(allProducts.length / productsPerPage);
+    const maxButtonsToShow = 5;
     let paginationButtons = '';
 
     // Add previous button
     paginationButtons += `<button class="page-button" onclick="prevPage()">Previous</button>&nbsp;`;
 
-    // Add page buttons
-    for (let i = 1; i <= totalPages; i++) {
-        paginationButtons += `<button class="page-button" onclick="changePage(${i})">${i}</button>&nbsp;`;
+    let startPage = Math.max(currentPage - Math.floor(maxButtonsToShow / 2), 1);
+    let endPage = Math.min(startPage + maxButtonsToShow - 1, totalPages);
+
+    if (endPage - startPage + 1 < maxButtonsToShow) {
+        startPage = Math.max(endPage - maxButtonsToShow + 1, 1);
+    }
+
+    for (let i = startPage; i <= endPage; i++) {
+        paginationButtons += `<button class="page-button ${i === currentPage ? 'active' : ''}" onclick="changePage(${i})">${i}</button>&nbsp;`;
     }
 
     // Add next button
@@ -61,6 +68,7 @@ const renderPagination = () => {
 const changePage = (pageNumber) => {
     currentPage = pageNumber;
     renderProducts();
+    renderPagination();
 };
 
 // change to previous page
@@ -68,6 +76,7 @@ const prevPage = () => {
     if (currentPage > 1) {
         currentPage--;
         renderProducts();
+        renderPagination();
     }
 };
 
@@ -77,6 +86,7 @@ const nextPage = () => {
     if (currentPage < totalPages) {
         currentPage++;
         renderProducts();
+        renderPagination();
     }
 };
 
