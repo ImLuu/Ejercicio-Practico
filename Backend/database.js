@@ -1,4 +1,5 @@
 const mysql = require('promise-mysql');
+require('dotenv').config();
 
 //DB MySQL 
 const connection = mysql.createConnection({
