@@ -1,6 +1,6 @@
 const express = require('express');
 const morgan = require("morgan");
-const routes = require("./routes/index.routes");
+const routes = require("./routes/routes");
 const cors = require("cors");
 const PORT = require("dotenv").config();
 
@@ -8,7 +8,7 @@ const PORT = require("dotenv").config();
 const app = express();
 
 //PORT
-app.set('port', process.env.PORT)
+app.set('port', process.env.PORT || 4000) 
 app.use(express.json());
 app.use(cors());
 app.listen(app.get('port'));
