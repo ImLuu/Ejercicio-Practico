@@ -3,6 +3,12 @@ const db= database.getConnection()
 
 //controllers
 //get all the products
+exports.getGreetings = async (req, res) => {
+    const connection = await db;
+    if (connection) {
+        return res.send({ msg: 'Welcome' })
+    }
+}
 exports.getProducts = async (req, res) => {
     const connection = await db;
     if (connection) {
