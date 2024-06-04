@@ -38,14 +38,21 @@ const renderProducts = () => {
     document.getElementById("card").innerHTML = products;
 };
 
-// render pagination buttons
+// render pagination buttons with arrow navigation
 const renderPagination = () => {
     const totalPages = Math.ceil(allProducts.length / productsPerPage);
     let paginationButtons = '';
 
+    // Add previous button
+    paginationButtons += `<button class="page-button" onclick="prevPage()">Previous</button>&nbsp;`;
+
+    // Add page buttons
     for (let i = 1; i <= totalPages; i++) {
-        paginationButtons += `<button class="page-button" onclick="changePage(${i})">${i}</button>`+`&nbsp;`;
+        paginationButtons += `<button class="page-button" onclick="changePage(${i})">${i}</button>&nbsp;`;
     }
+
+    // Add next button
+    paginationButtons += `<button class="page-button" onclick="nextPage()">Next</button>`;
 
     document.getElementById("pagination").innerHTML = paginationButtons;
 };
@@ -54,6 +61,23 @@ const renderPagination = () => {
 const changePage = (pageNumber) => {
     currentPage = pageNumber;
     renderProducts();
+};
+
+// change to previous page
+const prevPage = () => {
+    if (currentPage > 1) {
+        currentPage--;
+        renderProducts();
+    }
+};
+
+// change to next page
+const nextPage = () => {
+    const totalPages = Math.ceil(allProducts.length / productsPerPage);
+    if (currentPage < totalPages) {
+        currentPage++;
+        renderProducts();
+    }
 };
 
 // fetch categories from API
@@ -108,17 +132,15 @@ const searchProductsByID = async (id) => {
     } catch (err) {
         console.log(err);
     }
-}
+};
 
-
-// Capture the search input and pass it to searchProductsByID
+// capture the search input and pass it to searchProductsByID
 const searchById = (event) => {
     event.preventDefault();
     const searchInput = document.getElementById("searchInput").value;
     console.log(searchInput);
     searchProductsByID(searchInput);
-}
-
+};
 
 fetchProducts();
 dataCategories();
